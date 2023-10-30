@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PubSubChannel Chat Example</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+
+    <div class="container">
+        <chat-box id="chat-box1" name="l"></chat-box>
+        <chat-box id="chat-box2" name="r"></chat-box>
+    </div>
+    <br>
+    <div class="container">
+        <select id="boxSelector">
+            <option value="l">Left Box</option>
+            <option value="c">Center Box</option>
+            <option value="r">Right Box</option>
+        </select>
+        <input type="text" style="margin:10px;" id="textMessage" placeholder="Insert Chat Message" />
+        <button id="pushMessage">Push Message</button>
+    </div>
+
+    <script src="../js/ChatBox.js"></script>
+    <script src="../js/PubSubChannel.js"></script>
+
+    <script type="text/javascript">
+
+        var box1 = document.getElementById("chat-box1")
+        var box2 = document.getElementById("chat-box2")
+        var btn = document.getElementById("pushMessage")
+
+        var channel = new PubSubChannel()
+        channel.subscribe(box1)
+        channel.subscribe(box2)
+
+        btn.addEventListener('click', async event =>
+        {   
+            let text = document.getElementById("textMessage").value;
+            let choice = document.getElementById("boxSelector").value;
+
+            var message = {target : choice, message : text} // Use a Class-Type instead
+            await channel.send(message)
+        });
+        
+    </script>
+  </body>
+</html>

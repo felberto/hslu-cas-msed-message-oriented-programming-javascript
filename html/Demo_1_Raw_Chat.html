@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Raw Chat Example</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+        <chat-box id="chat-box1"></chat-box>
+        <chat-box id="chat-box2"></chat-box>
+    </div>
+    <br>
+    <div class="container">
+        <select id="boxSelector">
+            <option value="l">Left Box</option>
+            <option value="r">Right Box</option>
+        </select>
+        <input type="text" style="margin:10px;" id="textMessage" placeholder="Insert Chat Message" />
+        <button id="pushMessage">Push Message</button>
+    </div>
+
+    <script src="../js/ChatBox.js"></script>
+    <script type="text/javascript">
+
+        var btn = document.getElementById("pushMessage")
+        btn.addEventListener('click', event => 
+        {
+            let text = document.getElementById("textMessage").value;
+            let choice = document.getElementById("boxSelector").value;
+
+            var box = undefined
+
+            if(choice === "l")
+            {
+                box = document.getElementById("chat-box1")
+            } 
+            else 
+            {
+                box = document.getElementById("chat-box2")            
+            }
+           
+            box.addMessage(text)            
+        });
+        
+    </script>
+  </body>
+</html>
