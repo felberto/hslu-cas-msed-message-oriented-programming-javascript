@@ -11,7 +11,8 @@
 
     <div class="container">
         <chat-box id="chat-box1" name="l"></chat-box>
-        <chat-box id="chat-box2" name="r"></chat-box>
+        <chat-box id="chat-box2" name="c"></chat-box>
+        <chat-box id="chat-box3" name="r"></chat-box>
     </div>
     <br>
     <div class="container">
@@ -31,11 +32,13 @@
 
         var box1 = document.getElementById("chat-box1")
         var box2 = document.getElementById("chat-box2")
+        var box3 = document.getElementById("chat-box3")
         var btn = document.getElementById("pushMessage")
 
         var channel = new PubSubChannel()
         channel.subscribe(box1)
         channel.subscribe(box2)
+        channel.subscribe(box3)
 
         btn.addEventListener('click', async event =>
         {   

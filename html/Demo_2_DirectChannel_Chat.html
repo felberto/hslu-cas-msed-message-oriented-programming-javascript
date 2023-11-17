@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DirectChannel Chat Example</title>
-    <link rel="stylesheet" href="../css/styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="../css/styles.css"/>
+</head>
+<body>
 
-    <div class="container">
-        <chat-box id="chat-box1"></chat-box>
-        <chat-box id="chat-box2"></chat-box>
-    </div>
-    <br>
-    <div class="container">
-        <select id="boxSelector">
-            <option value="l">Left Box</option>
-            <option value="r">Right Box</option>
-        </select>
-        <input type="text" style="margin:10px;" id="textMessage" placeholder="Insert Chat Message" />
-        <button id="pushMessage">Push Message</button>
-    </div>
+<div class="container">
+    <chat-box id="chat-box1"></chat-box>
+    <chat-box id="chat-box2"></chat-box>
+    <chat-box id="chat-box3"></chat-box>
+</div>
+<br>
+<div class="container">
+    <select id="boxSelector">
+        <option value="l">Left Box</option>
+        <option value="c">Center Box</option>
+        <option value="r">Right Box</option>
+    </select>
+    <input type="text" style="margin:10px;" id="textMessage" placeholder="Insert Chat Message"/>
+    <button id="pushMessage">Push Message</button>
+</div>
 
-    <script src="../js/ChatBox.js"></script>
-    <script src="../js/DirectChannel.js"></script>
+<script src="../js/ChatBox.js"></script>
+<script src="../js/DirectChannel.js"></script>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var box1 = document.getElementById("chat-box1")
-        var box2 = document.getElementById("chat-box2")
-        var btn = document.getElementById("pushMessage")
+    var box1 = document.getElementById("chat-box1")
+    var box2 = document.getElementById("chat-box2")
+    var box3 = document.getElementById("chat-box3")
+    var btn = document.getElementById("pushMessage")
 
-        var channel1 = new DirectChannel();
-        channel1.setReceiver(box1)
+    var channel1 = new DirectChannel();
+    channel1.setReceiver(box1)
 
-        var channel2 = new DirectChannel();
-        channel2.setReceiver(box2)
+    var channel2 = new DirectChannel();
+    channel2.setReceiver(box2)
 
-        btn.addEventListener('click', async event =>
-        {   
-            let text = document.getElementById("textMessage").value;
-            let choice = document.getElementById("boxSelector").value;
+    var channel3 = new DirectChannel();
+    channel3.setReceiver(box3)
 
-            if(choice === "l")
-            {
-                await channel1.send(text)
-            } 
-            else 
-            {       
-                await channel2.send(text)   
-            }     
-        });
-        
-    </script>
-  </body>
+    btn.addEventListener('click', async event => {
+        let text = document.getElementById("textMessage").value;
+        let choice = document.getElementById("boxSelector").value;
+
+        if (choice === "l") {
+            await channel1.send(text)
+        } else if (choice === "r") {
+            await channel3.send(text)
+        } else {
+            await channel2.send(text)
+        }
+    });
+
+</script>
+</body>
 </html>
